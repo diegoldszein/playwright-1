@@ -7,6 +7,8 @@ exports.LoginPage = class LoginPage {
         this.username_textbox = page.getByLabel('Username')
         this.password_textbox = page.getByLabel('Password')
         this.login_button = page.getByRole('button', { name: 'Login' })
+        this.icon = page.getByRole('figure').locator('path')
+        this.head = page.getByRole('heading')
     }
 
     async gotoLoginPage(){
@@ -17,6 +19,8 @@ exports.LoginPage = class LoginPage {
         await this.username_textbox.fill(username)
         await this.password_textbox.fill(password)
         await this.login_button.click()
+        await expect(page.getByRole('figure').getByRole('img')).toBeVisible();
+        await expect(page.getByRole('heading')).toContainText('Iniciar sesión');
     }
 
 }
